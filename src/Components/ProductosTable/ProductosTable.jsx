@@ -25,7 +25,7 @@ export const ProductosTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await ProductoService.delete(id);
+      await ProductoService.remove(id);
       loadData();
     } catch (error) {
       console.error("Error al eliminar producto:", error);
