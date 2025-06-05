@@ -5,7 +5,7 @@ import { TrabajadoresTable } from "../Components/TrabajadoresTable/TrabajadoresT
 import { ProductosTable } from "../Components/ProductosTable/ProductosTable";
 import { CrearTrabajadorCard } from "../Components/CrearTrabajadorCard/CrearTrabajadorCard";
 import { CrearProductoCard } from "../Components/CrearProductoCard/CrearProductoCard";
-import TrabajadorService from "../Services/TrabajadorService";
+import AuthService from "../Services/AuthService";
 import ProductoService from "../Services/ProductoService";
 import LogoSinTexto from "../Media/LogoSinTexto.png";
 import LogoTexto from "../Media/LogoTexto.png";
@@ -94,7 +94,7 @@ export const UserPage = () => {
           onClose={cerrarCrear}
           onCreate={async (nuevo) => {
             try {
-              await TrabajadorService.create(nuevo);
+              await AuthService.register(nuevo);
               cerrarCrear();
               forzarRecarga();
             } catch (e) {
