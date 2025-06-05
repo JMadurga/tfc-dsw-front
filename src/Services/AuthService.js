@@ -1,4 +1,4 @@
-const API_URL = 'https://ladespensadelmoncayostorage.com/api/auth';
+const API_URL = 'http://ladespensadelmoncayostorage.com/api/auth';
 
 const login = async ({ email, password }) => {
   const response = await fetch(`${API_URL}/login`, {

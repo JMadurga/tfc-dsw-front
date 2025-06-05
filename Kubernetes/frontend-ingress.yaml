@@ -3,9 +3,14 @@ kind: Ingress
 metadata:
   name: frontend-ingress
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - ladespensadelmoncayostorage.com
+      secretName: ladespensa-tls
   rules:
     - host: ladespensadelmoncayostorage.com
       http:

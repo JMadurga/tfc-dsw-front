@@ -1,4 +1,4 @@
-const API_URL = 'https://ladespensadelmoncayostorage.com/api/clasevino';
+const API_URL = 'http://ladespensadelmoncayostorage.com/api/clasevino';
 
 const getToken = () => localStorage.getItem('token');
 
