@@ -1,11 +1,11 @@
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: frontend-ingress
+  name: backend-ingress
   namespace: default
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   tls:
@@ -16,10 +16,10 @@ spec:
     - host: ladespensadelmoncayostorage.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
-                name: frontend-service
+                name: backend-service
                 port:
-                  number: 80
+                  number: 3300
