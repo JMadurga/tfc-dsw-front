@@ -35,7 +35,7 @@ export const ProductsShow = () => {
     };
     const eliminarProducto = async (id) => {
         try {
-            await ProductoService.delete(id);
+            await ProductoService.remove(id);
         } catch (error) {
             console.error("Error al eliminar producto:", error);
         }
