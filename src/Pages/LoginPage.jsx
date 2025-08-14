@@ -17,7 +17,7 @@ export const LoginPage = () => {
           <div className='flex gap-4 mb-9'>
             <img src={LogoTexto} alt="" className="w-3/4 h-32"/>
             <img src={LogoSinTexto} alt="" className='w-3/4 h-32'/>
-          </div>
+          </div> 
           <h2 className="py-8 mb-8 text-xl text-center">
             Esta página es de uso exclusivo para trabajadores <br /> de la empresa a través del login
           </h2>

@@ -7,12 +7,12 @@ import CategoriaService from "../../Services/CategoriaService";
 
 
 export const ProductsShow = () => {
-    const [productoEdit, setProductoEdit] = useState(null);
+
     const [productos, setProductos] = useState([])
     const [categorias, setCategorias] = useState([])
+    const [searchTerm, setSearchTerm] = useState("");
     
-    const abrirModal = (producto) => setProductoEdit(producto);
-    const cerrarModal = () => setProductoEdit(null);
+
     
     const fetch = async () =>{
         const productosData = await ProductoService.getAll();
@@ -25,63 +25,63 @@ export const ProductsShow = () => {
         fetch();
     }, []);
 
-    const guardarCambios = async (productoEditado) => {
-        try {
-            await ProductoService.update(productoEditado.id_producto, productoEditado);
-            cerrarModal(); 
-        } catch (error) {
-            console.error("Error al modificar el producto:", error);
-        }
-    };
-    const eliminarProducto = async (id) => {
-        try {
-            await ProductoService.remove(id);
-        } catch (error) {
-            console.error("Error al eliminar producto:", error);
-        }
-    };
+
     
     return(
         <>
             <div className="flex flex-col items-center w-full font-ibm">
-                {categorias.map((categoria)=>(
-                    <div className="w-11/12 gap-10 px-2 py-4 mt-9" key={categoria.id}>
-                        <div className="py-2 text-lg font-bold text-center bg-blue-200 rounded-t ">
-                            {categoria.nombre}
-                        </div>
-                        <table className="w-full border-collapse table-fixed ">
-                            <thead>
+                <div className="w-11/12 mt-6">
+                    <input
+                        type="text"
+                        placeholder="Buscar producto..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                </div>
+                {categorias.map((categoria) => {
+                    const productosCategoria = productos.filter(
+                        (producto) => producto.id_categoria === categoria.id
+                    );
+
+                    const productosFiltrados = searchTerm
+                        ? productosCategoria.filter((producto) =>
+                            producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+                        )
+                        : productosCategoria;
+
+                    if (searchTerm && productosFiltrados.length === 0) {
+                        return null;
+                    }
+
+                    return (
+                        <div className="w-11/12 gap-10 px-2 py-4 mt-9" key={categoria.id}>
+                            <div className="py-2 text-lg font-bold text-center bg-blue-200 rounded-t">
+                                {categoria.nombre}
+                            </div>
+                            <table className="w-full border-collapse table-fixed">
+                                <thead>
                                 <tr className="text-left bg-gray-100">
                                     <th className="w-1/3 px-4 py-2 border">Nombre</th>
                                     <th className="w-1/3 px-4 py-2 border">Stock Mínimo</th>
                                     <th className="w-1/3 px-4 py-2 border">Stock</th>
-                                    <th className="w-1/3 px-4 py-2 border">Update</th>
-                                    <th className="w-1/3 px-4 py-2 border">Delete</th>
-                                    
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {productos.filter((productos) => productos.id_categoria === categoria.id).map((producto) =>(
-                                    <tr key={producto.id_producto} >
-                                        <td className="px-4 py-2 border">{producto.nombre}</td>
-                                        <td className="px-4 py-2 border">{producto.stock_minimo}</td>
-                                        <td className="px-4 py-2 border">{producto.stock}</td>
-                                        <td className="px-4 py-2 border"><img src={LapizIcon} alt="" className="w-5 h-5" onClick={() => abrirModal(producto)} /></td>
-                                        <td className="px-4 py-2 border"><img src={BasuraIcon} alt=""  className="w-5 h-5" onClick={() => eliminarProducto(producto.id_producto)}/></td>
+                                </thead>
+                                <tbody>
+                                {productosFiltrados.map((producto) => (
+                                    <tr key={producto.id_producto}>
+                                    <td className="px-4 py-2 border">{producto.nombre}</td>
+                                    <td className="px-4 py-2 border">{producto.stock_minimo}</td>
+                                    <td className="px-4 py-2 border">{producto.stock}</td>
                                     </tr>
                                 ))}
-                            </tbody>
-                        </table>
-                    </div>
-                ))} 
+                                </tbody>
+                            </table>
+                        </div>
+                    );
+                })}
+                
             </div>
-        {productoEdit && (
-            <UpdateCard
-            producto={productoEdit}
-            onClose={cerrarModal}
-            onUpdate={guardarCambios}
-            />
-        )}
         </>
     )
 }
