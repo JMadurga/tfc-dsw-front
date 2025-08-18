@@ -61,6 +61,12 @@ export const UserPage = () => {
             >
               Productos
             </button>
+            <button
+              className={`text-xl  ${activeTab === "clasevino" ? "text-blue-500" : "text-gray-700"}`}
+              onClick={() => setActiveTab("clasevino")}
+            >
+              Clases de Vino 
+            </button>
           </div>
 
             <div className="absolute top-0 right-10">
