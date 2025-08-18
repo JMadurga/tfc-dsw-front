@@ -28,7 +28,6 @@ export const ClasesVinoTable = () => {
 
   const handleUpdate = async (claseActualizada) => {
     try {
-      // Solo enviamos los campos editables
       await ClaseVinoService.update(claseActualizada.id_clase_vino, {
         nombre: claseActualizada.nombre,
         descripcion: claseActualizada.descripcion,

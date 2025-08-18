@@ -3,14 +3,17 @@ import Mas from '../Media/Mas.png'
 import { Header } from "../Components/Header/Header";
 import { TrabajadoresTable } from "../Components/TrabajadoresTable/TrabajadoresTable";
 import { ProductosTable } from "../Components/ProductosTable/ProductosTable";
+import { ClasesVinoTable } from "../Components/ClaseVinoTable/ClaseVinoTable";
 import { CrearTrabajadorCard } from "../Components/CrearTrabajadorCard/CrearTrabajadorCard";
 import { CrearProductoCard } from "../Components/CrearProductoCard/CrearProductoCard";
+import { CrearClaseVinoCard } from "../Components/CrearClaseVinoCard/CrearClaseVinoCard";
 import AuthService from "../Services/AuthService";
 import ProductoService from "../Services/ProductoService";
 import LogoSinTexto from "../Media/LogoSinTexto.png";
 import LogoTexto from "../Media/LogoTexto.png";
 import {jwtDecode} from "jwt-decode";
 import ClaseVinoService from "../Services/ClaseVinoService";
+
 
 
 
@@ -95,7 +98,7 @@ export const UserPage = () => {
 
       {activeTab === "trabajadores" && <TrabajadoresTable reload={reload} />}
       {activeTab === "productos" && <ProductosTable reload={reload} />}
-      {activeTab === "clasevino" && <ClaseVinoService reload={reload} />}
+      {activeTab === "clasevino" && <ClasesVinoTable reload={reload} />}
 
       {mostrarCrear && activeTab === "trabajadores" && (
         <CrearTrabajadorCard
@@ -126,6 +129,21 @@ export const UserPage = () => {
           }}
         />
       )}
+      {mostrarCrear && activeTab === "clasevino" && (
+        <CrearClaseVinoCard
+          onClose={cerrarCrear}
+          onCreate={async (nueva) => {
+            try {
+              await ClaseVinoService.create(nueva);  
+              cerrarCrear();
+              forzarRecarga();  
+            } catch (e) {
+              console.error("Error al crear clase de vino:", e);
+            }
+          }}
+        />
+      )}
+
     </div>
   );
 };
