@@ -10,6 +10,7 @@ import ProductoService from "../Services/ProductoService";
 import LogoSinTexto from "../Media/LogoSinTexto.png";
 import LogoTexto from "../Media/LogoTexto.png";
 import {jwtDecode} from "jwt-decode";
+import ClaseVinoService from "../Services/ClaseVinoService";
 
 
 
@@ -94,6 +95,7 @@ export const UserPage = () => {
 
       {activeTab === "trabajadores" && <TrabajadoresTable reload={reload} />}
       {activeTab === "productos" && <ProductosTable reload={reload} />}
+      {activeTab === "clasevino" && <ClaseVinoService reload={reload} />}
 
       {mostrarCrear && activeTab === "trabajadores" && (
         <CrearTrabajadorCard
