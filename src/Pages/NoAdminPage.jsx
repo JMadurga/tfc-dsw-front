@@ -7,7 +7,7 @@ import { UserInfo } from "../Components/UserInfo/UserInfo";
 
 
 
-export const UserPage = () => {
+export const NoAdminPage = () => {
  
   const [leftTab, setLeftTab] = useState("usuario"); 
   
