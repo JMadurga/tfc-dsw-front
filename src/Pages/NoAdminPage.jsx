@@ -4,7 +4,7 @@ import LogoSinTexto from "../Media/LogoSinTexto.png";
 import LogoTexto from "../Media/LogoTexto.png";
 import PowerIcon from "../Media/power.png"; 
 import { UserInfo } from "../Components/UserInfo/UserInfo";
-
+import { Notificaciones } from "../Components/Notificaciones/Notificaciones";
 
 
 export const NoAdminPage = () => {
