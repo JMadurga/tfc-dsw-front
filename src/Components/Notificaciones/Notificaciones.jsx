@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import ReposicionService from "../../Services/ReposicionService";
 import ProductoService from "../../Services/ProductoService";
@@ -18,7 +17,7 @@ export const Notificaciones = () => {
         setRepos(data);
       } catch (e) {
         console.error(e);
-        alert("No se pudieron cargar las reposiciones");
+        window.alert("No se pudieron cargar las reposiciones");
       }
     })();
   }, []);
@@ -38,10 +37,9 @@ export const Notificaciones = () => {
     return [];
   };
 
-
   const ensureProductsInCache = async (neededIds) => {
     const missing = neededIds.filter((id) => productsCache[id] == null);
-    if (missing.length === 0) return; 
+    if (missing.length === 0) return productsCache; 
 
     const limit = 200;
     let offset = 0;
@@ -53,7 +51,7 @@ export const Notificaciones = () => {
       if (list.length === 0) break;
 
       for (const p of list) {
-        const idp = p.id_producto  
+        const idp = p.id_producto; 
         if (idp != null && missing.includes(idp)) {
           found[idp] = p;
         }
@@ -69,11 +67,12 @@ export const Notificaciones = () => {
     }
 
     setProductsCache(found);
+    return found; 
   };
 
   const completar = async (repo) => {
     if (processingId) return;
-    if (!confirm("¿Marcar como completada? Se restará el stock y se eliminará la lista.")) return;
+    if (!window.confirm("¿Marcar como completada? Se restará el stock y se eliminará la lista.")) return;
 
     setProcessingId(repo.id_reposicion);
     try {
@@ -85,11 +84,11 @@ export const Notificaciones = () => {
         return;
       }
       const idsNecesarios = Array.from(new Set(items.map((it) => it.id_producto)));
-      await ensureProductsInCache(idsNecesarios);
+      const cache = await ensureProductsInCache(idsNecesarios);
 
       const updates = []; 
       for (const it of items) {
-        const prod = productsCache[it.id_producto];
+        const prod = (cache && cache[it.id_producto]) ?? productsCache[it.id_producto];
         const actual = Number((prod ?? {})[STOCK_FIELD]);
         if (!Number.isFinite(actual)) {
           throw new Error(`Producto ${it.id_producto}: campo "${STOCK_FIELD}" inválido`);
@@ -123,7 +122,7 @@ export const Notificaciones = () => {
       });
     } catch (e) {
       console.error(e);
-      alert(e.message || "No se pudo completar la reposición.");
+      window.alert(e.message || "No se pudo completar la reposición.");
     } finally {
       setProcessingId(null);
     }
