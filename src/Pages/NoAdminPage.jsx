@@ -55,8 +55,6 @@ export const NoAdminPage = () => {
             >
               <img src={PowerIcon} alt="Desconectar" className="w-6 h-6" />
             </button>
-
-            {role && <p className="mt-3 text-xs text-slate-500">Rol: {role}</p>}
           </div>
         </div>
 
