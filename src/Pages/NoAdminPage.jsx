@@ -17,18 +17,18 @@ export const NoAdminPage = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-white ">
       <Header />
-      <div className="flex flex-col items-center mt-16 mb-6 font-ibm">
+      <div className="flex flex-col items-center w-full mt-16 mb-6 border-b border-black font-ibm">
         <div className="flex items-center mb-10 space-x-10">
           <img src={LogoTexto} alt="Logo con texto" className="h-24" />
           <img src={LogoSinTexto} alt="Logo sin texto" className="h-24" />
         </div>
       </div>
 
-      <div className="flex max-w-6xl mx-auto rounded-md shadow-sm">
+      <div className="flex max-w-6xl mx-auto rounded-md shadow-sm ">
         <div className="w-1/3 border-r border-black">
-          <div className="p-5 mt-5 space-y-4">
+          <div className="flex flex-col p-5 mt-5 space">
             <button
               onClick={() => setLeftTab("usuario")}
               className={`w-32 rounded-md px-4 py-2 text-sm transition
