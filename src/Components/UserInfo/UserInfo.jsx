@@ -31,20 +31,20 @@ export const UserInfo = () => {
       <h2 id="titulo-usuario" className="sr-only">Información del usuario</h2>
 
       <div className="grid grid-cols-12 gap-x-10 gap-y-8">
-        <Field label="Nombre" value={user.nombre} className="col-span-12 md:col-span-6" />
-        <Field label="Apellido" value={user.apellido} className="col-span-12 md:col-span-6" />
-        <Field label="Correo" value={user.email} className="col-span-12" />
+        <Field label="Nombre" value={user?.nombre} className="col-span-12 md:col-span-6" />
+        <Field label="Apellido" value={user?.apellido} className="col-span-12 md:col-span-6" />
+        <Field label="Correo" value={user?.email} className="col-span-12" />
         <Field
           label="Fecha de contratación"
           value={
-            user.fechaContratacion
-              ? new Date(user.fechaContratacion).toLocaleDateString()
+            user?.fecha_contratacion
+              ? new Date(user?.fecha_contratacion).toLocaleDateString()
               : undefined
           }
           className="col-span-12 md:col-span-6"
         />
-        <Field label="Teléfono" value={user.telefono} className="col-span-12 md:col-span-6" />
-        <Field label="Dirección" value={user.direccion} className="col-span-12" />
+        <Field label="Teléfono" value={user?.telefono} className="col-span-12 md:col-span-6" />
+        <Field label="Dirección" value={user?.direccion} className="col-span-12" />
       </div>
     </section>
   );
