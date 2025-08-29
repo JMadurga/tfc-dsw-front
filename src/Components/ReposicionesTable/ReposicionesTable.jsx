@@ -24,7 +24,7 @@ export const ReposicionesTable = () => {
     }
   };
 
-  useEffect(() => { loadRepos(); }, [reload]);
+  useEffect(() => { loadRepos(); }, []);
 
   const toggle = (id) => {
     setOpenId((cur) => (cur === id ? null : id));
