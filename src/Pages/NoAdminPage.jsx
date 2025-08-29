@@ -27,7 +27,7 @@ export const NoAdminPage = () => {
       </div>
 
       <div className="flex max-w-6xl mx-auto rounded-md shadow-sm ">
-        <div className="w-1/3 border-r border-black">
+        <div className="border-r border-black">
           <div className="flex flex-col p-5 mt-5 space">
             <button
               onClick={() => setLeftTab("usuario")}
@@ -59,7 +59,7 @@ export const NoAdminPage = () => {
         </div>
 
         
-        <div className="w-2/3 p-10">
+        <div className="p-10 ">
           {leftTab === "usuario" && <UserInfo />}
           {leftTab === "notificaciones" && <Notificaciones />}
         </div>

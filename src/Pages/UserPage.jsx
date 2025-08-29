@@ -7,6 +7,8 @@ import { ClasesVinoTable } from "../Components/ClaseVinoTable/ClaseVinoTable";
 import { CrearTrabajadorCard } from "../Components/CrearTrabajadorCard/CrearTrabajadorCard";
 import { CrearProductoCard } from "../Components/CrearProductoCard/CrearProductoCard";
 import { CrearClaseVinoCard } from "../Components/CrearClaseVinoCard/CrearClaseVinoCard";
+import { CrearReposicionCard } from "../Components/CrearReposicionCard/CrearReposicionCard";
+import { ReposicionesTable } from "../Components/ReposicionesTable/ReposicionesTable";
 import AuthService from "../Services/AuthService";
 import ProductoService from "../Services/ProductoService";
 import LogoSinTexto from "../Media/LogoSinTexto.png";
@@ -71,6 +73,12 @@ export const UserPage = () => {
             >
               Clases de Vino 
             </button>
+            <button
+              className={`text-xl  ${activeTab === "reposicion" ? "text-blue-500" : "text-gray-700"}`}
+              onClick={() => setActiveTab("reposicion")}
+            >
+              Reposiciones
+            </button>
           </div>
 
             <div className="absolute top-0 right-10">
@@ -99,6 +107,7 @@ export const UserPage = () => {
       {activeTab === "trabajadores" && <TrabajadoresTable reload={reload} />}
       {activeTab === "productos" && <ProductosTable reload={reload} />}
       {activeTab === "clasevino" && <ClasesVinoTable reload={reload} />}
+      {activeTab === "reposicion" && <ReposicionesTable reload={reload} />}
 
       {mostrarCrear && activeTab === "trabajadores" && (
         <CrearTrabajadorCard
@@ -140,6 +149,15 @@ export const UserPage = () => {
             } catch (e) {
               console.error("Error al crear clase de vino:", e);
             }
+          }}
+        />
+      )}
+      {mostrarCrear && activeTab === "reposicion" && (
+        <CrearReposicionCard
+          onClose={cerrarCrear}
+          onCreate={() => {
+            cerrarCrear();
+            forzarRecarga();
           }}
         />
       )}
