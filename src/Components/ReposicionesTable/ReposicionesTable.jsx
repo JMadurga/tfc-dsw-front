@@ -6,10 +6,10 @@ import { UpdateReposicionCard } from "../UpdateReposicionCard/UpdateReposicionCa
 
 export const ReposicionesTable = () => {
   const [repos, setRepos] = useState([]);
-  const [openId, setOpenId] = useState(null); 
+  const [openId, setOpenId] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [editandoItem, setEditandoItem] = useState(null); 
-  const [itemForm, setItemForm] = useState({ id_producto: "", unidades: "" }); 
+  const [editandoItem, setEditandoItem] = useState(null);
+  const [itemForm, setItemForm] = useState({ id_producto: "", unidades: "" });
 
   const loadRepos = async () => {
     setLoading(true);
@@ -18,13 +18,15 @@ export const ReposicionesTable = () => {
       setRepos(data);
     } catch (e) {
       console.error(e);
-      alert("No se pudieron cargar las reposiciones");
+      window.alert("No se pudieron cargar las reposiciones");
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => { loadRepos(); }, []);
+  useEffect(() => {
+    loadRepos();
+  }, []);
 
   const toggle = (id) => {
     setOpenId((cur) => (cur === id ? null : id));
@@ -32,19 +34,17 @@ export const ReposicionesTable = () => {
   };
 
   const deleteRepo = async (id) => {
-    if (!confirm("¿Eliminar esta reposición?")) return;
     try {
       await ReposicionService.remove(id);
       setRepos((prev) => prev.filter((r) => r.id_reposicion !== id));
       if (openId === id) setOpenId(null);
     } catch (e) {
       console.error(e);
-      alert("No se pudo eliminar la reposición");
+      window.alert("No se pudo eliminar la reposición");
     }
   };
 
   const deleteItem = async (repoId, itemId) => {
-    if (!confirm("¿Eliminar este item?")) return;
     try {
       await ReposicionService.removeItem(repoId, itemId);
       setRepos((prev) =>
@@ -56,7 +56,7 @@ export const ReposicionesTable = () => {
       );
     } catch (e) {
       console.error(e);
-      alert("No se pudo eliminar el item");
+      window.alert("No se pudo eliminar el item");
     }
   };
 
@@ -64,7 +64,7 @@ export const ReposicionesTable = () => {
     const id_producto = Number(itemForm.id_producto);
     const unidades = Number(itemForm.unidades);
     if (!id_producto || !Number.isInteger(unidades) || unidades <= 0) {
-      alert("Indica un id_producto válido y unidades (>0)");
+      window.alert("Indica un id_producto válido y unidades (>0)");
       return;
     }
     try {
@@ -74,7 +74,7 @@ export const ReposicionesTable = () => {
       setOpenId(repoId);
     } catch (e) {
       console.error(e);
-      alert(e.message || "No se pudo añadir el item");
+      window.alert(e.message || "No se pudo añadir el item");
     }
   };
 
@@ -96,7 +96,7 @@ export const ReposicionesTable = () => {
       setEditandoItem(null);
     } catch (e) {
       console.error(e);
-      alert("No se pudo actualizar el item");
+      window.alert("No se pudo actualizar el item");
     }
   };
 
@@ -200,7 +200,6 @@ export const ReposicionesTable = () => {
                               ))
                             )}
 
-                            
                             <tr>
                               <td className="p-2 italic border text-slate-500" colSpan={2}>
                                 Añadir producto
