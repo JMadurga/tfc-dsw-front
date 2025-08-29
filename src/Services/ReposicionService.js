@@ -1,4 +1,4 @@
-const API_URL = 'https://ladespensadelmoncayostorage.com/api/reposicion';
+const API_URL = 'https://ladespensadelmoncayostorage.com/api/reposiciones';
 
 const getToken = () => localStorage.getItem('token');
 
