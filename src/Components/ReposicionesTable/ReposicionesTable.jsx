@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ReposicionService from "../../Services/ReposicionService";
 import LapizIcon from "../../Media/LapizIcon.png";
 import BasuraIcon from "../../Media/BasuraIcon.png";
-import { UpdateReposicionItemCard } from "../UpdateReposicionItemCard/UpdateReposicionItemCard";
+import { UpdateReposicionCard } from "../UpdateReposicionCard/UpdateReposicionCard";
 
 export const ReposicionesTable = () => {
   const [repos, setRepos] = useState([]);
@@ -154,7 +154,6 @@ export const ReposicionesTable = () => {
                   <tr>
                     <td colSpan={5} className="p-0 border-t">
                       <div className="p-3 bg-gray-50">
-                        {/* Subtabla */}
                         <table className="w-full text-sm">
                           <thead>
                             <tr className="bg-gray-200">
@@ -201,7 +200,7 @@ export const ReposicionesTable = () => {
                               ))
                             )}
 
-                            {/* Añadir item */}
+                            
                             <tr>
                               <td className="p-2 italic border text-slate-500" colSpan={2}>
                                 Añadir producto
@@ -251,7 +250,7 @@ export const ReposicionesTable = () => {
       </table>
 
       {editandoItem && (
-        <UpdateReposicionItemCard
+        <UpdateReposicionCard
           item={editandoItem.item}
           onClose={() => setEditandoItem(null)}
           onUpdate={(n) => confirmarUpdateItem(editandoItem.repoId, editandoItem.item, n)}
