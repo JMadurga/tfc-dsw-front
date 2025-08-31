@@ -25,12 +25,10 @@ export const NoAdminPage = () => {
         </div>
       </div>
 
-  
-      <main className="flex-1 min-h-0">
-
-        <div className="flex w-full h-full px-6 mx-auto overflow-hidden rounded-md shadow-sm">
-
-          <aside className="flex flex-col w-64 h-full border-r border-black shrink-0">
+      <main className="flex flex-1 min-h-0 overflow-hidden">
+        <div className="flex flex-1 w-full min-h-0 px-6 mx-auto overflow-hidden rounded-md shadow-sm">
+          {/* Sidebar */}
+          <aside className="flex flex-col w-64 border-r border-black shrink-0">
             <div className="flex flex-col p-5 mt-5 space-y-6">
               <button
                 onClick={() => setLeftTab("usuario")}
@@ -67,6 +65,7 @@ export const NoAdminPage = () => {
           </section>
         </div>
       </main>
+    
     </div>
   );
 };
