@@ -25,10 +25,12 @@ export const NoAdminPage = () => {
         </div>
       </div>
 
+  
       <main className="flex-1 min-h-0">
-        <div className="flex w-full h-full max-w-6xl mx-auto rounded-md shadow-sm">
-          
-          <aside className="flex flex-col w-64 h-full border-r border-black">
+
+        <div className="flex w-full h-full px-6 mx-auto overflow-hidden rounded-md shadow-sm">
+
+          <aside className="flex flex-col w-64 h-full border-r border-black shrink-0">
             <div className="flex flex-col p-5 mt-5 space-y-6">
               <button
                 onClick={() => setLeftTab("usuario")}
@@ -59,15 +61,12 @@ export const NoAdminPage = () => {
             </div>
           </aside>
 
-          <section className="flex flex-col flex-1 min-h-0 p-10 overflow-auto">
-            <div className="flex-1 h-full">
-              {leftTab === "usuario" && <UserInfo />}
-              {leftTab === "notificaciones" && <Notificaciones />}
-            </div>
+          <section className="flex-1 min-w-0 p-10 overflow-auto">
+            {leftTab === "usuario" && <UserInfo />}
+            {leftTab === "notificaciones" && <Notificaciones />}
           </section>
         </div>
       </main>
-      
     </div>
   );
 };
