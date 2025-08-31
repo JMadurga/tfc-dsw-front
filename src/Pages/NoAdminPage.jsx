@@ -25,12 +25,11 @@ export const NoAdminPage = () => {
         </div>
       </div>
 
-   
       <main className="flex-1 min-h-0">
-        <div className="flex h-full max-w-6xl mx-auto rounded-md shadow-sm">
+        <div className="flex w-full h-full max-w-6xl mx-auto rounded-md shadow-sm">
           
           <aside className="flex flex-col w-64 h-full border-r border-black">
-            <div className="flex flex-col p-5 mt-5 space-y-4">
+            <div className="flex flex-col p-5 mt-5 space-y-6">
               <button
                 onClick={() => setLeftTab("usuario")}
                 className={`w-32 rounded-md px-4 py-2 text-sm transition
@@ -48,7 +47,6 @@ export const NoAdminPage = () => {
               </button>
             </div>
 
-           
             <div className="p-5 mt-auto">
               <p className="mb-3 text-black">Desconectar</p>
               <button
@@ -61,13 +59,15 @@ export const NoAdminPage = () => {
             </div>
           </aside>
 
-          {/* Contenido */}
-          <section className="flex-1 p-10 overflow-auto">
-            {leftTab === "usuario" && <UserInfo />}
-            {leftTab === "notificaciones" && <Notificaciones />}
+          <section className="flex flex-col flex-1 min-h-0 p-10 overflow-auto">
+            <div className="flex-1 h-full">
+              {leftTab === "usuario" && <UserInfo />}
+              {leftTab === "notificaciones" && <Notificaciones />}
+            </div>
           </section>
         </div>
       </main>
+      
     </div>
   );
 };
