@@ -3,6 +3,7 @@ import ReposicionService from "../../Services/ReposicionService";
 import LapizIcon from "../../Media/LapizIcon.png";
 import BasuraIcon from "../../Media/BasuraIcon.png";
 import { UpdateReposicionCard } from "../UpdateReposicionCard/UpdateReposicionCard";
+import { ProductoAutocomplete } from "../ProductoAutocomplete/ProductoAutocomplete";
 
 export const ReposicionesTable = () => {
   const [repos, setRepos] = useState([]);
@@ -11,6 +12,7 @@ export const ReposicionesTable = () => {
   const [editandoItem, setEditandoItem] = useState(null);
   const [itemForm, setItemForm] = useState({ id_producto: "", unidades: "" });
 
+  
   const loadRepos = async () => {
     setLoading(true);
     try {
@@ -199,22 +201,16 @@ export const ReposicionesTable = () => {
                                 </tr>
                               ))
                             )}
-
                             <tr>
-                              <td className="p-2 italic border text-slate-500" colSpan={2}>
-                                Añadir producto
-                              </td>
+                              <td className="p-2 italic border text-slate-500" colSpan={2}>Añadir producto</td>
+
                               <td className="p-2 border">
-                                <input
-                                  type="number"
-                                  placeholder="ID Producto"
-                                  className="w-40 px-2 py-1 border rounded"
-                                  value={itemForm.id_producto}
-                                  onChange={(e) =>
-                                    setItemForm((f) => ({ ...f, id_producto: e.target.value }))
-                                  }
+                                <ProductoAutocomplete
+                                  onSelect={(p) => setItemForm((f) => ({ ...f, id_producto: p.id_producto }))}
+                                  placeholder="Escribe al menos 2 letras…"
                                 />
                               </td>
+
                               <td className="p-2 text-center border">
                                 <input
                                   type="number"
@@ -222,11 +218,10 @@ export const ReposicionesTable = () => {
                                   placeholder="Unidades"
                                   className="w-24 px-2 py-1 text-center border rounded"
                                   value={itemForm.unidades}
-                                  onChange={(e) =>
-                                    setItemForm((f) => ({ ...f, unidades: e.target.value }))
-                                  }
+                                  onChange={(e) => setItemForm((f) => ({ ...f, unidades: e.target.value }))}
                                 />
                               </td>
+
                               <td className="p-2 text-center border">
                                 <button
                                   onClick={() => addItem(id)}
