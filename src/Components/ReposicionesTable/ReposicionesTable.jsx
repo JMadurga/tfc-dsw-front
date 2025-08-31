@@ -110,7 +110,7 @@ export const ReposicionesTable = () => {
             <th className="p-2 text-left border">ID</th>
             <th className="p-2 text-left border">Trabajador</th>
             <th className="p-2 text-left border">Fecha</th>
-            <th className="p-2 text-center border"># Items</th>
+            <th className="p-2 text-center border">Productos</th>
             <th className="p-2 text-center border">Acciones</th>
           </tr>
         </thead>
